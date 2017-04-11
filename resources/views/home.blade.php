@@ -1,17 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+    <asideblock :show=true placement="left" header="Users list">
+        <sidebar></sidebar>
+    </asideblock>
+    <div class="container">
+        <actions></actions>
+        <wall>
 
-                <div class="panel-body">
-                    You are logged in!
-                </div>
-            </div>
-        </div>
+        </wall>
     </div>
-</div>
 @endsection

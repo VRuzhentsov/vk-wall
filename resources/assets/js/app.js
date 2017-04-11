@@ -15,6 +15,16 @@ require('./bootstrap');
 
 Vue.component('example', require('./components/Example.vue'));
 
+Vue.component('asideblock', require('vue-strap/src/Aside.vue'));
+
+Vue.component('sidebar', require('./components/Sidebar.vue'));
+
+Vue.component('actions', require('./components/Actions.vue'));
+
+Vue.component('wall', require('./components/Wall.vue'));
+
+Vue.component('comment', require('./components/Comment.vue'));
+
 const app = new Vue({
     el: '#app'
 });

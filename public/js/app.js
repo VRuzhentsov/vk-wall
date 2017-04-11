@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "./";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 39);
+/******/ 	return __webpack_require__(__webpack_require__.s = 35);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -11213,8 +11213,9 @@ module.exports = g;
 
 /***/ }),
 /* 10 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -11222,7 +11223,7 @@ module.exports = g;
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-__webpack_require__(31);
+__webpack_require__(30);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -11230,7 +11231,17 @@ __webpack_require__(31);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', __webpack_require__(34));
+Vue.component('example', __webpack_require__(47));
+
+Vue.component('asideblock', __webpack_require__(53));
+
+Vue.component('sidebar', __webpack_require__(48));
+
+Vue.component('actions', __webpack_require__(60));
+
+Vue.component('wall', __webpack_require__(61));
+
+Vue.component('comment', __webpack_require__(65));
 
 var app = new Vue({
   el: '#app'
@@ -12085,39 +12096,10 @@ module.exports = function spread(callback) {
 
 /***/ }),
 /* 30 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    mounted: function mounted() {
-        console.log('Component mounted.');
-    }
-});
-
-/***/ }),
-/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-window._ = __webpack_require__(33);
+window._ = __webpack_require__(32);
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -12127,7 +12109,7 @@ window._ = __webpack_require__(33);
 
 window.$ = window.jQuery = __webpack_require__(8);
 
-__webpack_require__(32);
+__webpack_require__(31);
 
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces
@@ -12135,7 +12117,7 @@ __webpack_require__(32);
  * and simple, leaving you to focus on building your next great project.
  */
 
-window.Vue = __webpack_require__(37);
+window.Vue = __webpack_require__(33);
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -12166,7 +12148,7 @@ window.axios.defaults.headers.common = {
 // });
 
 /***/ }),
-/* 32 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(jQuery) {/*!
@@ -14550,7 +14532,7 @@ if (typeof jQuery === 'undefined') {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ }),
-/* 33 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -31639,126 +31621,10 @@ if (typeof jQuery === 'undefined') {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9), __webpack_require__(38)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9), __webpack_require__(34)(module)))
 
 /***/ }),
-/* 34 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(35)(
-  /* script */
-  __webpack_require__(30),
-  /* template */
-  __webpack_require__(36),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "/opt/lampp/htdocs/vk-wall/resources/assets/js/components/Example.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] Example.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-9f737e60", Component.options)
-  } else {
-    hotAPI.reload("data-v-9f737e60", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 35 */
-/***/ (function(module, exports) {
-
-module.exports = function normalizeComponent (
-  rawScriptExports,
-  compiledTemplate,
-  scopeId,
-  cssModules
-) {
-  var esModule
-  var scriptExports = rawScriptExports = rawScriptExports || {}
-
-  // ES6 modules interop
-  var type = typeof rawScriptExports.default
-  if (type === 'object' || type === 'function') {
-    esModule = rawScriptExports
-    scriptExports = rawScriptExports.default
-  }
-
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (compiledTemplate) {
-    options.render = compiledTemplate.render
-    options.staticRenderFns = compiledTemplate.staticRenderFns
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = scopeId
-  }
-
-  // inject cssModules
-  if (cssModules) {
-    var computed = options.computed || (options.computed = {})
-    Object.keys(cssModules).forEach(function (key) {
-      var module = cssModules[key]
-      computed[key] = function () { return module }
-    })
-  }
-
-  return {
-    esModule: esModule,
-    exports: scriptExports,
-    options: options
-  }
-}
-
-
-/***/ }),
-/* 36 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _vm._m(0)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "container"
-  }, [_c('div', {
-    staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-md-8 col-md-offset-2"
-  }, [_c('div', {
-    staticClass: "panel panel-default"
-  }, [_c('div', {
-    staticClass: "panel-heading"
-  }, [_vm._v("Example Component")]), _vm._v(" "), _c('div', {
-    staticClass: "panel-body"
-  }, [_vm._v("\n                    I'm an example component!\n                ")])])])])])
-}]}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-9f737e60", module.exports)
-  }
-}
-
-/***/ }),
-/* 37 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41086,7 +40952,7 @@ module.exports = Vue$3;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(9)))
 
 /***/ }),
-/* 38 */
+/* 34 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -41114,12 +40980,1521 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 39 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(10);
 module.exports = __webpack_require__(11);
 
+
+/***/ }),
+/* 36 */,
+/* 37 */
+/***/ (function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function() {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		var result = [];
+		for(var i = 0; i < this.length; i++) {
+			var item = this[i];
+			if(item[2]) {
+				result.push("@media " + item[2] + "{" + item[1] + "}");
+			} else {
+				result.push(item[1]);
+			}
+		}
+		return result.join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+
+/***/ }),
+/* 38 */,
+/* 39 */,
+/* 40 */,
+/* 41 */,
+/* 42 */,
+/* 43 */,
+/* 44 */
+/***/ (function(module, exports) {
+
+module.exports = function normalizeComponent (
+  rawScriptExports,
+  compiledTemplate,
+  scopeId,
+  cssModules
+) {
+  var esModule
+  var scriptExports = rawScriptExports = rawScriptExports || {}
+
+  // ES6 modules interop
+  var type = typeof rawScriptExports.default
+  if (type === 'object' || type === 'function') {
+    esModule = rawScriptExports
+    scriptExports = rawScriptExports.default
+  }
+
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (compiledTemplate) {
+    options.render = compiledTemplate.render
+    options.staticRenderFns = compiledTemplate.staticRenderFns
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = scopeId
+  }
+
+  // inject cssModules
+  if (cssModules) {
+    var computed = options.computed || (options.computed = {})
+    Object.keys(cssModules).forEach(function (key) {
+      var module = cssModules[key]
+      computed[key] = function () { return module }
+    })
+  }
+
+  return {
+    esModule: esModule,
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
+/***/ }),
+/* 45 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    mounted: function mounted() {
+        console.log('Component mounted.');
+    }
+});
+
+/***/ }),
+/* 46 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    mounted: function mounted() {
+        //            console.log('Component mounted.')
+    }
+});
+
+/***/ }),
+/* 47 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(44)(
+  /* script */
+  __webpack_require__(45),
+  /* template */
+  __webpack_require__(50),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/opt/lampp/htdocs/vk-wall/resources/assets/js/components/Example.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Example.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-9f737e60", Component.options)
+  } else {
+    hotAPI.reload("data-v-9f737e60", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 48 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(44)(
+  /* script */
+  __webpack_require__(46),
+  /* template */
+  __webpack_require__(49),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/opt/lampp/htdocs/vk-wall/resources/assets/js/components/Sidebar.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Sidebar.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0b98f1c2", Component.options)
+  } else {
+    hotAPI.reload("data-v-0b98f1c2", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 49 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _vm._m(0)
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-md-12"
+  }, [_c('p', [_vm._v("List of users will be here")])])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-0b98f1c2", module.exports)
+  }
+}
+
+/***/ }),
+/* 50 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _vm._m(0)
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "container"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-md-8 col-md-offset-2"
+  }, [_c('div', {
+    staticClass: "panel panel-default"
+  }, [_c('div', {
+    staticClass: "panel-heading"
+  }, [_vm._v("Example Component")]), _vm._v(" "), _c('div', {
+    staticClass: "panel-body"
+  }, [_vm._v("\n                    I'm an example component!\n                ")])])])])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-9f737e60", module.exports)
+  }
+}
+
+/***/ }),
+/* 51 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_utils_js__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_NodeList_js__ = __webpack_require__(55);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    show: {
+      type: Boolean,
+      coerce: __WEBPACK_IMPORTED_MODULE_0__utils_utils_js__["a" /* coerce */].boolean,
+      required: true,
+      twoWay: true
+    },
+    placement: {
+      type: String,
+      default: 'right'
+    },
+    header: {
+      type: String
+    },
+    width: {
+      type: Number,
+      coerce: __WEBPACK_IMPORTED_MODULE_0__utils_utils_js__["a" /* coerce */].number,
+      default: 320
+    }
+  },
+  watch: {
+    show: function show(val) {
+      var _this = this;
+
+      var body = document.body;
+      var scrollBarWidth = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__utils_utils_js__["b" /* getScrollBarWidth */])();
+      if (val) {
+        if (!this._backdrop) {
+          this._backdrop = document.createElement('div');
+        }
+        this._backdrop.className = 'aside-backdrop';
+        body.appendChild(this._backdrop);
+        body.classList.add('modal-open');
+        if (scrollBarWidth !== 0) {
+          body.style.paddingRight = scrollBarWidth + 'px';
+        }
+        // request property that requires layout to force a layout
+        var x = this._backdrop.clientHeight;
+        this._backdrop.classList.add('in');
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__utils_NodeList_js__["a" /* default */])(this._backdrop).on('click', function () {
+          return _this.close();
+        });
+      } else {
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__utils_NodeList_js__["a" /* default */])(this._backdrop).on('transitionend', function () {
+          __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__utils_NodeList_js__["a" /* default */])(_this._backdrop).off();
+          try {
+            body.classList.remove('modal-open');
+            body.style.paddingRight = '0';
+            body.removeChild(_this._backdrop);
+            _this._backdrop = null;
+          } catch (e) {}
+        });
+        this._backdrop.className = 'aside-backdrop';
+      }
+    }
+  },
+  methods: {
+    close: function close() {
+      this.show = false;
+    }
+  }
+});
+
+/***/ }),
+/* 52 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(37)();
+exports.push([module.i, "\n.aside-open {\n  -webkit-transition: -webkit-transform 0.3s;\n  transition: -webkit-transform 0.3s;\n  transition: transform 0.3s;\n  transition: transform 0.3s, -webkit-transform 0.3s;\n}\n.aside-open.has-push-right {\n  -webkit-transform: translateX(-300px);\n          transform: translateX(-300px);\n}\n.aside {\n    position: fixed;\n    top: 0;\n    bottom: 0;\n    z-index: 1049;\n    overflow: auto;\n    background: #fff;\n}\n.aside.left {\n  left: 0;\n  right: auto;\n}\n.aside.right {\n  left: auto;\n  right: 0;\n}\n.slideleft-enter {\n  -webkit-animation:slideleft-in .3s;\n          animation:slideleft-in .3s;\n}\n.slideleft-leave {\n  -webkit-animation:slideleft-out .3s;\n          animation:slideleft-out .3s;\n}\n@-webkit-keyframes slideleft-in {\n0% {\n    -webkit-transform: translateX(-100%);\n            transform: translateX(-100%);\n    opacity: 0;\n}\n100% {\n    -webkit-transform: translateX(0);\n            transform: translateX(0);\n    opacity: 1;\n}\n}\n@keyframes slideleft-in {\n0% {\n    -webkit-transform: translateX(-100%);\n            transform: translateX(-100%);\n    opacity: 0;\n}\n100% {\n    -webkit-transform: translateX(0);\n            transform: translateX(0);\n    opacity: 1;\n}\n}\n@-webkit-keyframes slideleft-out {\n0% {\n    -webkit-transform: translateX(0);\n            transform: translateX(0);\n    opacity: 1;\n}\n100% {\n    -webkit-transform: translateX(-100%);\n            transform: translateX(-100%);\n    opacity: 0;\n}\n}\n@keyframes slideleft-out {\n0% {\n    -webkit-transform: translateX(0);\n            transform: translateX(0);\n    opacity: 1;\n}\n100% {\n    -webkit-transform: translateX(-100%);\n            transform: translateX(-100%);\n    opacity: 0;\n}\n}\n.slideright-enter {\n  -webkit-animation:slideright-in .3s;\n          animation:slideright-in .3s;\n}\n.slideright-leave {\n  -webkit-animation:slideright-out .3s;\n          animation:slideright-out .3s;\n}\n@-webkit-keyframes slideright-in {\n0% {\n    -webkit-transform: translateX(100%);\n            transform: translateX(100%);\n    opacity: 0;\n}\n100% {\n    -webkit-transform: translateX(0);\n            transform: translateX(0);\n    opacity: 1;\n}\n}\n@keyframes slideright-in {\n0% {\n    -webkit-transform: translateX(100%);\n            transform: translateX(100%);\n    opacity: 0;\n}\n100% {\n    -webkit-transform: translateX(0);\n            transform: translateX(0);\n    opacity: 1;\n}\n}\n@-webkit-keyframes slideright-out {\n0% {\n    -webkit-transform: translateX(0);\n            transform: translateX(0);\n    opacity: 1;\n}\n100% {\n    -webkit-transform: translateX(100%);\n            transform: translateX(100%);\n    opacity: 0;\n}\n}\n@keyframes slideright-out {\n0% {\n    -webkit-transform: translateX(0);\n            transform: translateX(0);\n    opacity: 1;\n}\n100% {\n    -webkit-transform: translateX(100%);\n            transform: translateX(100%);\n    opacity: 0;\n}\n}\n.aside:focus {\n    outline: 0\n}\n@media (max-width: 991px) {\n.aside {\n    min-width:240px\n}\n}\n.aside.left {\n  right: auto;\n  left: 0\n}\n.aside.right {\n  right: 0;\n  left: auto\n}\n.aside .aside-dialog .aside-header {\n  border-bottom: 1px solid #e5e5e5;\n  min-height: 16.43px;\n  padding: 6px 15px;\n  background: #337ab7;\n  color: #fff\n}\n.aside .aside-dialog .aside-header .close {\n  margin-right: -8px;\n  padding: 4px 8px;\n  color: #fff;\n  font-size: 25px;\n  opacity: .8\n}\n.aside .aside-dialog .aside-body {\n  position: relative;\n  padding: 15px\n}\n.aside .aside-dialog .aside-footer {\n  padding: 15px;\n  text-align: right;\n  border-top: 1px solid #e5e5e5\n}\n.aside .aside-dialog .aside-footer .btn+.btn {\n  margin-left: 5px;\n  margin-bottom: 0\n}\n.aside .aside-dialog .aside-footer .btn-group .btn+.btn {\n  margin-left: -1px\n}\n.aside .aside-dialog .aside-footer .btn-block+.btn-block {\n  margin-left: 0\n}\n.aside-backdrop {\n  position: fixed;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  z-index: 1040;\n  opacity: 0;\n  -webkit-transition: opacity .3s ease;\n  transition: opacity .3s ease;\n  background-color: #000\n}\n.aside-backdrop.in {\n  opacity: .5;\n  filter: alpha(opacity=50)\n}\n", ""]);
+
+/***/ }),
+/* 53 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+/* styles */
+__webpack_require__(57)
+
+var Component = __webpack_require__(44)(
+  /* script */
+  __webpack_require__(51),
+  /* template */
+  __webpack_require__(54),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/opt/lampp/htdocs/vk-wall/node_modules/vue-strap/src/Aside.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Aside.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4b206f0d", Component.options)
+  } else {
+    hotAPI.reload("data-v-4b206f0d", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 54 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.show),
+      expression: "show"
+    }],
+    staticClass: "aside",
+    class: {
+      left: _vm.placement === 'left',
+        right: _vm.placement === 'right'
+    },
+    style: ({
+      width: _vm.width + 'px'
+    }),
+    attrs: {
+      "transition": (this.placement === 'left') ? 'slideleft' : 'slideright'
+    }
+  }, [_c('div', {
+    staticClass: "aside-dialog"
+  }, [_c('div', {
+    staticClass: "aside-content"
+  }, [_c('div', {
+    staticClass: "aside-header"
+  }, [_c('button', {
+    staticClass: "close",
+    attrs: {
+      "type": "button"
+    },
+    on: {
+      "click": _vm.close
+    }
+  }, [_c('span', [_vm._v("×")])]), _vm._v(" "), _c('h4', {
+    staticClass: "aside-title"
+  }, [_vm._t("header", [_vm._v("\n          " + _vm._s(_vm.header) + "\n        ")])], 2)]), _vm._v(" "), _c('div', {
+    staticClass: "aside-body"
+  }, [_vm._t("default")], 2)])])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-4b206f0d", module.exports)
+  }
+}
+
+/***/ }),
+/* 55 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+const ArrayProto = Array.prototype
+const nodeError = new Error('Passed arguments must be of Node')
+let blurEvent
+let blurList = []
+let Events = []
+
+function isNode (val) { return val instanceof window.Node }
+function isNodeList (val) { return val instanceof window.NodeList || val instanceof NodeList || val instanceof window.HTMLCollection || val instanceof Array }
+
+function splitWords (val) { val = val.trim(); return val.length ? val.replace(/\s+/, ' ').split(' ') : [] }
+function joinWords (val) { return val.length ? val.join(' ') : '' }
+
+class NodeList {
+  constructor (args) {
+    var nodes = args
+    if (args[0] === window) {
+      nodes = [window]
+    } else if (typeof args[0] === 'string') {
+      nodes = (args[1] || document).querySelectorAll(args[0])
+      if (args[1]) { this.owner = args[1] }
+    } else if (0 in args && !isNode(args[0]) && args[0] && 'length' in args[0]) {
+      nodes = args[0]
+      if (args[1]) { this.owner = args[1] }
+    }
+    if (nodes) {
+      for (let i in nodes) {
+        this[i] = nodes[i]
+      }
+      this.length = nodes.length
+    } else {
+      this.length = 0
+    }
+  }
+
+  concat (...args) {
+    let nodes = ArrayProto.slice.call(this)
+    function flatten (arr) {
+      ArrayProto.forEach.call(arr, el => {
+        if (isNode(el)) {
+          if (!~nodes.indexOf(el)) nodes.push(el)
+        } else if (isNodeList(el)) {
+          flatten(el)
+        }
+      })
+    }
+    ArrayProto.forEach.call(args, arg => {
+      if (isNode(arg)) {
+        if (!~nodes.indexOf(arg)) nodes.push(arg)
+      } else if (isNodeList(arg)) {
+        flatten(arg)
+      } else {
+        throw Error('Concat arguments must be of a Node, NodeList, HTMLCollection, or Array of (Node, NodeList, HTMLCollection, Array)')
+      }
+    })
+    return NodeListJS(nodes, this)
+  }
+  delete () {
+    var notRemoved = flatten(this).filter(el => {
+      if (el.remove) {
+        el.remove()
+      } else if (el.parentNode) {
+        el.parentNode.removeChild(el)
+      }
+      return document.body.contains(el)
+    })
+    if (notRemoved.length) console.warn('NodeList: Some nodes could not be deleted.')
+    return notRemoved
+  }
+  each (...args) {
+    ArrayProto.forEach.apply(this, args)
+    return this
+  }
+  filter (...args) {
+    return NodeListJS(ArrayProto.filter.apply(this, args), this)
+  }
+  find (element) {
+    let nodes = []
+    flatten(this).forEach(node => { ArrayProto.push.apply(nodes, node.querySelectorAll(element)) })
+    return flatten(nodes, this.owner)
+  }
+  findChildren (element) {
+    if (element) return this.find(element).filter(el => this.includes(el.parentElement))
+    return flatten(this.map(el => el.children))
+  }
+  forEach (...args) {
+    ArrayProto.forEach.apply(this, args)
+    return this
+  }
+  includes (element, index) {
+    return ~this.indexOf(element, index)
+  }
+  map (...args) {
+    var mapped = ArrayProto.map.apply(this, args)
+    return mapped.some(el => (isNode(el) || isNodeList(el))) ? flatten(mapped, this) : mapped
+  }
+  parent () {
+    return flatten(this.map(el => el.parentNode), this)
+  }
+  pop (amount) {
+    if (typeof amount !== 'number') { amount = 1 }
+    let nodes = []
+    let pop = ArrayProto.pop.bind(this)
+    while (amount--) nodes.push(pop())
+    return NodeListJS(nodes, this)
+  }
+  push (...args) {
+    ArrayProto.forEach.call(args, arg => {
+      if (!isNode(arg)) throw nodeError
+      if (!~this.indexOf(arg)) ArrayProto.push.call(this, arg)
+    })
+    return this
+  }
+  shift (amount) {
+    if (typeof amount !== 'number') { amount = 1 }
+    let nodes = []
+    while (amount--) nodes.push(ArrayProto.shift.call(this))
+    return nodes.length == 1 ? nodes[0] : NodeListJS(nodes, this)
+  }
+  slice (...args) {
+    return NodeListJS(ArrayProto.slice.apply(this, args), this)
+  }
+  splice (...args) {
+    for (let i = 2, l = args.length; i < l; i++) {
+      if (!isNode(args[i])) throw nodeError
+    }
+    ArrayProto.splice.apply(this, args)
+    return this
+  }
+  unshift (...args) {
+    let unshift = ArrayProto.unshift.bind(this)
+    ArrayProto.forEach.call(args, arg => {
+      if (!isNode(arg)) throw nodeError
+      if (!~this.indexOf(arg)) unshift(arg)
+    })
+    return this
+  }
+
+  addClass (classes) {
+    return this.toggleClass(classes, true)
+  }
+  removeClass (classes) {
+    return this.toggleClass(classes, false)
+  }
+  toggleClass (classes, value) {
+    var method = (value === undefined || value === null) ? 'toggle' : value ? 'add' : 'remove'
+    if (typeof classes === 'string') {
+      classes = splitWords(classes)
+    }
+    this.each(el => {
+      var list = splitWords(el.className)
+      classes.forEach(c => {
+        var hasClass = ~list.indexOf(c)
+        if (!hasClass && method !== 'remove') list.push(c)
+        if (hasClass && method !== 'add') { list = list.filter(el => (el !== c)) }
+      })
+      list = joinWords(list)
+      if (!list) el.removeAttribute('class')
+      else el.className = list
+    })
+    return this
+  }
+
+  get (prop) {
+    let arr = []
+    this.each(el => {
+      if (el !== null) { el = el[prop] }
+      arr.push(el)
+    })
+    return flatten(arr, this)
+  }
+  set (prop, value) {
+    if (prop.constructor === Object) {
+      this.each(el => {
+        if (el) {
+          for (let key in prop) {
+            if (key in el) { el[key] = prop[key] }
+          }
+        }
+      })
+    } else {
+      this.each(el => {
+        if (prop in el) { el[prop] = value }
+      })
+    }
+    return this
+  }
+  call (...args) {
+    const method = ArrayProto.shift.call(args)
+    let arr = []
+    let returnThis = true
+    this.each(el => {
+      if (el && el[method] instanceof Function) {
+        el = el[method].apply(el, args)
+        arr.push(el)
+        if (returnThis && el !== undefined) {
+          returnThis = false
+        }
+      } else {
+        arr.push(undefined)
+      }
+    })
+    return returnThis ? this : flatten(arr, this)
+  }
+  item (index) {
+    return NodeListJS([this[index]], this)
+  }
+  get asArray () {
+    return ArrayProto.slice.call(this)
+  }
+
+  // event handlers
+  on (events, selector, callback) {
+    if (typeof events === 'string') { events = splitWords(events) }
+    if (!this || !this.length) return this
+    if (callback === undefined) {
+      callback = selector
+      selector = null
+    }
+    if (!callback) return this
+    const fn = callback
+    callback = selector ? function (e) {
+      let els = NodeListJS(selector, this)
+      if (!els.length) { return }
+      els.some(el => {
+        let target = el.contains(e.target)
+        if (target) fn.call(el, e, el)
+        return target
+      })
+    } : function (e) {
+      fn.apply(this, [e, this])
+    }
+    this.each(el => {
+      events.forEach(event => {
+        if (el === window || isNode(el)) {
+          el.addEventListener(event, callback, false)
+          Events.push({
+            el: el,
+            event: event,
+            callback: callback
+          })
+        }
+      })
+    })
+    return this
+  }
+  off (events, callback) {
+    if (events instanceof Function) {
+      callback = events
+      events = null
+    }
+    events = events instanceof Array ? events : typeof events === 'string' ? splitWords(events) : null
+    this.each(el => {
+      Events = Events.filter(e => {
+        if(e && e.el === el && (!callback || callback === e.callback) && (!events || ~events.indexOf(e.event))) {
+          e.el.removeEventListener(e.event, e.callback)
+          return false
+        }
+        return true
+      })
+    })
+    return this
+  }
+  onBlur (callback) {
+    if (!this || !this.length) return this
+    if (!callback) return this
+    this.each(el => { blurList.push({el, callback}) })
+    if (!blurEvent) {
+      blurEvent = e => {
+        blurList.forEach(item => {
+          let target = item.el.contains(e.target) || item.el === e.target
+          if (!target) item.callback.call(item.el, e, item.el)
+        })
+      }
+      document.addEventListener('click', blurEvent, false)
+      document.addEventListener('touchstart', blurEvent, false)
+    }
+    return this
+  }
+  offBlur (callback) {
+    this.each(el => {
+      blurList = blurList.filter(blur => {
+        if (blur && blur.el === el && (!callback || blur.callback === callback)) {
+          return false
+        }
+        return el
+      })
+    })
+    return this
+  }
+}
+
+let NL = NodeList.prototype
+
+function flatten (arr, owner) {
+  let list = []
+  ArrayProto.forEach.call(arr, el => {
+    if (isNode(el)) {
+      if (!~list.indexOf(el)) list.push(el)
+    } else if (isNodeList(el)) {
+      for (let id in el) list.push(el[id])
+    } else if (el !== null) {
+      arr.get = NL.get
+      arr.set = NL.set
+      arr.call = NL.call
+      arr.owner = owner
+      return arr
+    }
+  })
+  return NodeListJS(list, owner)
+}
+
+Object.getOwnPropertyNames(ArrayProto).forEach(key => {
+  if (key !== 'join' && key !== 'copyWithin' && key !== 'fill' && NL[key] === undefined) {
+    NL[key] = ArrayProto[key]
+  }
+})
+if (window.Symbol && Symbol.iterator) {
+  NL[Symbol.iterator] = NL.values = ArrayProto[Symbol.iterator]
+}
+const div = document.createElement('div')
+function setterGetter (prop) {
+  if (NL[prop]) return
+  if (div[prop] instanceof Function) {
+    NL[prop] = (...args) => {
+      let arr = []
+      let returnThis = true
+      for (let i in NL) {
+        let el = NL[i]
+        if (el && el[prop] instanceof Function) {
+          el = el[prop].apply(el, args)
+          arr.push(el)
+          if (returnThis && el !== undefined) {
+            returnThis = false
+          }
+        } else {
+          arr.push(undefined)
+        }
+      }
+      return returnThis ? this : flatten(arr, this)
+    }
+  } else {
+    Object.defineProperty(NL, prop, {
+      get () {
+        let arr = []
+        this.each(el => {
+          if (el !== null) { el = el[prop] }
+          arr.push(el)
+        })
+        return flatten(arr, this)
+      },
+      set (value) {
+        this.each(el => {
+          if (el && prop in el) { el[prop] = value }
+        })
+      }
+    })
+  }
+}
+for (let prop in div) setterGetter(prop)
+
+function NodeListJS (...args) { return new NodeList(args) }
+window.NL = NodeListJS
+
+/* harmony default export */ __webpack_exports__["a"] = (NodeListJS);
+
+
+/***/ }),
+/* 56 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export getJSON */
+/* harmony export (immutable) */ __webpack_exports__["b"] = getScrollBarWidth;
+/* unused harmony export translations */
+/* unused harmony export delayer */
+/* unused harmony export VueFixer */
+// coerce convert som types of data into another type
+const coerce = {
+  // Convert a string to booleam. Otherwise, return the value without modification, so if is not boolean, Vue throw a warning.
+  boolean: val => (typeof val === 'string' ? val === '' || val === 'true' ? true : (val === 'false' || val === 'null' || val === 'undefined' ? false : val) : val),
+  // Attempt to convert a string value to a Number. Otherwise, return 0.
+  number: (val, alt = null) => (typeof val === 'number' ? val : val === undefined || val === null || isNaN(Number(val)) ? alt : Number(val)),
+  // Attempt to convert to string any value, except for null or undefined.
+  string: val => (val === undefined || val === null ? '' : val + ''),
+  // Pattern accept RegExp, function, or string (converted to RegExp). Otherwise return null.
+  pattern: val => (val instanceof Function || val instanceof RegExp ? val : typeof val === 'string' ? new RegExp(val) : null)
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = coerce;
+
+
+function getJSON (url) {
+  var request = new window.XMLHttpRequest()
+  var data = {}
+  // p (-simulated- promise)
+  var p = {
+    then (fn1, fn2) { return p.done(fn1).fail(fn2) },
+    catch (fn) { return p.fail(fn) },
+    always (fn) { return p.done(fn).fail(fn) }
+  };
+  ['done', 'fail'].forEach(name => {
+    data[name] = []
+    p[name] = (fn) => {
+      if (fn instanceof Function) data[name].push(fn)
+      return p
+    }
+  })
+  p.done(JSON.parse)
+  request.onreadystatechange = () => {
+    if (request.readyState === 4) {
+      let e = {status: request.status}
+      if (request.status === 200) {
+        try {
+          var response = request.responseText
+          for (var i in data.done) {
+            var value = data.done[i](response)
+            if (value !== undefined) { response = value }
+          }
+        } catch (err) {
+          data.fail.forEach(fail => fail(err))
+        }
+      } else {
+        data.fail.forEach(fail => fail(e))
+      }
+    }
+  }
+  request.open('GET', url)
+  request.setRequestHeader('Accept', 'application/json')
+  request.send()
+  return p
+}
+
+function getScrollBarWidth () {
+  if (document.documentElement.scrollHeight <= document.documentElement.clientHeight) {
+    return 0
+  }
+  let inner = document.createElement('p')
+  inner.style.width = '100%'
+  inner.style.height = '200px'
+
+  let outer = document.createElement('div')
+  outer.style.position = 'absolute'
+  outer.style.top = '0px'
+  outer.style.left = '0px'
+  outer.style.visibility = 'hidden'
+  outer.style.width = '200px'
+  outer.style.height = '150px'
+  outer.style.overflow = 'hidden'
+  outer.appendChild(inner)
+
+  document.body.appendChild(outer)
+  let w1 = inner.offsetWidth
+  outer.style.overflow = 'scroll'
+  let w2 = inner.offsetWidth
+  if (w1 === w2) w2 = outer.clientWidth
+
+  document.body.removeChild(outer)
+
+  return (w1 - w2)
+}
+
+// return all the translations or the default language (english)
+function translations (lang = 'en') {
+  let text = {
+    daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+    limit: 'Limit reached ({{limit}} items max).',
+    loading: 'Loading...',
+    minLength: 'Min. Length',
+    months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+    notSelected: 'Nothing Selected',
+    required: 'Required',
+    search: 'Search'
+  }
+  return window.VueStrapLang ? window.VueStrapLang(lang) : text
+}
+
+// delayer: set a function that execute after a delay
+// @params (function, delay_prop or value, default_value)
+function delayer (fn, varTimer, ifNaN = 100) {
+  function toInt (el) { return /^[0-9]+$/.test(el) ? Number(el) || 1 : null }
+  var timerId
+  return function (...args) {
+    if (timerId) clearTimeout(timerId)
+    timerId = setTimeout(() => {
+      fn.apply(this, args)
+    }, toInt(varTimer) || toInt(this[varTimer]) || ifNaN)
+  }
+}
+
+// Fix a vue instance Lifecycle to vue 1/2 (just the basic elements, is not a real parser, so this work only if your code is compatible with both)
+function VueFixer (vue) {
+  var vue2 = !window.Vue || !window.Vue.partial
+  var mixin = {
+    computed: {
+      vue2 () { return !this.$dispatch }
+    }
+  }
+  if (!vue2) {
+    if (vue.beforeCreate) {
+      mixin.create = vue.beforeCreate
+      delete vue.beforeCreate
+    }
+    if (vue.beforeMount) {
+      vue.beforeCompile = vue.beforeMount
+      delete vue.beforeMount
+    }
+    if (vue.mounted) {
+      vue.ready = vue.mounted
+      delete vue.mounted
+    }
+  } else {
+    if (vue.beforeCompile) {
+      vue.beforeMount = vue.beforeCompile
+      delete vue.beforeCompile
+    }
+    if (vue.compiled) {
+      mixin.compiled = vue.compiled
+      delete vue.compiled
+    }
+    if (vue.ready) {
+      vue.mounted = vue.ready
+      delete vue.ready
+    }
+  }
+  if (!vue.mixins) { vue.mixins = [] }
+  vue.mixins.unshift(mixin)
+  return vue
+}
+
+
+/***/ }),
+/* 57 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(52);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(58)("772fdc50", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../css-loader/index.js!../../vue-loader/lib/style-rewriter.js?id=data-v-4b206f0d!../../vue-loader/lib/selector.js?type=styles&index=0!./Aside.vue", function() {
+     var newContent = require("!!../../css-loader/index.js!../../vue-loader/lib/style-rewriter.js?id=data-v-4b206f0d!../../vue-loader/lib/selector.js?type=styles&index=0!./Aside.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 58 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*
+  MIT License http://www.opensource.org/licenses/mit-license.php
+  Author Tobias Koppers @sokra
+  Modified by Evan You @yyx990803
+*/
+
+var hasDocument = typeof document !== 'undefined'
+
+if (typeof DEBUG !== 'undefined' && DEBUG) {
+  if (!hasDocument) {
+    throw new Error(
+    'vue-style-loader cannot be used in a non-browser environment. ' +
+    "Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
+  ) }
+}
+
+var listToStyles = __webpack_require__(59)
+
+/*
+type StyleObject = {
+  id: number;
+  parts: Array<StyleObjectPart>
+}
+
+type StyleObjectPart = {
+  css: string;
+  media: string;
+  sourceMap: ?string
+}
+*/
+
+var stylesInDom = {/*
+  [id: number]: {
+    id: number,
+    refs: number,
+    parts: Array<(obj?: StyleObjectPart) => void>
+  }
+*/}
+
+var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
+var singletonElement = null
+var singletonCounter = 0
+var isProduction = false
+var noop = function () {}
+
+// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+// tags it will allow on a page
+var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
+
+module.exports = function (parentId, list, _isProduction) {
+  isProduction = _isProduction
+
+  var styles = listToStyles(parentId, list)
+  addStylesToDom(styles)
+
+  return function update (newList) {
+    var mayRemove = []
+    for (var i = 0; i < styles.length; i++) {
+      var item = styles[i]
+      var domStyle = stylesInDom[item.id]
+      domStyle.refs--
+      mayRemove.push(domStyle)
+    }
+    if (newList) {
+      styles = listToStyles(parentId, newList)
+      addStylesToDom(styles)
+    } else {
+      styles = []
+    }
+    for (var i = 0; i < mayRemove.length; i++) {
+      var domStyle = mayRemove[i]
+      if (domStyle.refs === 0) {
+        for (var j = 0; j < domStyle.parts.length; j++) {
+          domStyle.parts[j]()
+        }
+        delete stylesInDom[domStyle.id]
+      }
+    }
+  }
+}
+
+function addStylesToDom (styles /* Array<StyleObject> */) {
+  for (var i = 0; i < styles.length; i++) {
+    var item = styles[i]
+    var domStyle = stylesInDom[item.id]
+    if (domStyle) {
+      domStyle.refs++
+      for (var j = 0; j < domStyle.parts.length; j++) {
+        domStyle.parts[j](item.parts[j])
+      }
+      for (; j < item.parts.length; j++) {
+        domStyle.parts.push(addStyle(item.parts[j]))
+      }
+      if (domStyle.parts.length > item.parts.length) {
+        domStyle.parts.length = item.parts.length
+      }
+    } else {
+      var parts = []
+      for (var j = 0; j < item.parts.length; j++) {
+        parts.push(addStyle(item.parts[j]))
+      }
+      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }
+    }
+  }
+}
+
+function createStyleElement () {
+  var styleElement = document.createElement('style')
+  styleElement.type = 'text/css'
+  head.appendChild(styleElement)
+  return styleElement
+}
+
+function addStyle (obj /* StyleObjectPart */) {
+  var update, remove
+  var styleElement = document.querySelector('style[data-vue-ssr-id~="' + obj.id + '"]')
+
+  if (styleElement) {
+    if (isProduction) {
+      // has SSR styles and in production mode.
+      // simply do nothing.
+      return noop
+    } else {
+      // has SSR styles but in dev mode.
+      // for some reason Chrome can't handle source map in server-rendered
+      // style tags - source maps in <style> only works if the style tag is
+      // created and inserted dynamically. So we remove the server rendered
+      // styles and inject new ones.
+      styleElement.parentNode.removeChild(styleElement)
+    }
+  }
+
+  if (isOldIE) {
+    // use singleton mode for IE9.
+    var styleIndex = singletonCounter++
+    styleElement = singletonElement || (singletonElement = createStyleElement())
+    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
+    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
+  } else {
+    // use multi-style-tag mode in all other cases
+    styleElement = createStyleElement()
+    update = applyToTag.bind(null, styleElement)
+    remove = function () {
+      styleElement.parentNode.removeChild(styleElement)
+    }
+  }
+
+  update(obj)
+
+  return function updateStyle (newObj /* StyleObjectPart */) {
+    if (newObj) {
+      if (newObj.css === obj.css &&
+          newObj.media === obj.media &&
+          newObj.sourceMap === obj.sourceMap) {
+        return
+      }
+      update(obj = newObj)
+    } else {
+      remove()
+    }
+  }
+}
+
+var replaceText = (function () {
+  var textStore = []
+
+  return function (index, replacement) {
+    textStore[index] = replacement
+    return textStore.filter(Boolean).join('\n')
+  }
+})()
+
+function applyToSingletonTag (styleElement, index, remove, obj) {
+  var css = remove ? '' : obj.css
+
+  if (styleElement.styleSheet) {
+    styleElement.styleSheet.cssText = replaceText(index, css)
+  } else {
+    var cssNode = document.createTextNode(css)
+    var childNodes = styleElement.childNodes
+    if (childNodes[index]) styleElement.removeChild(childNodes[index])
+    if (childNodes.length) {
+      styleElement.insertBefore(cssNode, childNodes[index])
+    } else {
+      styleElement.appendChild(cssNode)
+    }
+  }
+}
+
+function applyToTag (styleElement, obj) {
+  var css = obj.css
+  var media = obj.media
+  var sourceMap = obj.sourceMap
+
+  if (media) {
+    styleElement.setAttribute('media', media)
+  }
+
+  if (sourceMap) {
+    // https://developer.chrome.com/devtools/docs/javascript-debugging
+    // this makes source maps inside style tags work properly in Chrome
+    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
+    // http://stackoverflow.com/a/26603875
+    css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
+  }
+
+  if (styleElement.styleSheet) {
+    styleElement.styleSheet.cssText = css
+  } else {
+    while (styleElement.firstChild) {
+      styleElement.removeChild(styleElement.firstChild)
+    }
+    styleElement.appendChild(document.createTextNode(css))
+  }
+}
+
+
+/***/ }),
+/* 59 */
+/***/ (function(module, exports) {
+
+/**
+ * Translates the list format produced by css-loader into something
+ * easier to manipulate.
+ */
+module.exports = function listToStyles (parentId, list) {
+  var styles = []
+  var newStyles = {}
+  for (var i = 0; i < list.length; i++) {
+    var item = list[i]
+    var id = item[0]
+    var css = item[1]
+    var media = item[2]
+    var sourceMap = item[3]
+    var part = {
+      id: parentId + ':' + i,
+      css: css,
+      media: media,
+      sourceMap: sourceMap
+    }
+    if (!newStyles[id]) {
+      styles.push(newStyles[id] = { id: id, parts: [part] })
+    } else {
+      newStyles[id].parts.push(part)
+    }
+  }
+  return styles
+}
+
+
+/***/ }),
+/* 60 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(44)(
+  /* script */
+  null,
+  /* template */
+  __webpack_require__(63),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/opt/lampp/htdocs/vk-wall/resources/assets/js/components/Actions.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Actions.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-f8f5123a", Component.options)
+  } else {
+    hotAPI.reload("data-v-f8f5123a", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 61 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(44)(
+  /* script */
+  __webpack_require__(64),
+  /* template */
+  __webpack_require__(62),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/opt/lampp/htdocs/vk-wall/resources/assets/js/components/Wall.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Wall.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1ccd1054", Component.options)
+  } else {
+    hotAPI.reload("data-v-1ccd1054", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 62 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-md-12"
+  }, _vm._l((_vm.posts), function(post) {
+    return _c('div', {
+      staticClass: "row"
+    }, [_c('div', {
+      staticClass: "col-md-12"
+    }, [_c('div', [_vm._v("Post")]), _vm._v(" "), _vm._l((post.comments), function(comment) {
+      return _c("comment", {
+        key: comment,
+        tag: "comment",
+        attrs: {
+          "item": comment
+        }
+      })
+    })], 2)])
+  }))])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-1ccd1054", module.exports)
+  }
+}
+
+/***/ }),
+/* 63 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _vm._m(0)
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-md-12"
+  }, [_c('p', [_vm._v("Actions block")])])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-f8f5123a", module.exports)
+  }
+}
+
+/***/ }),
+/* 64 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            posts: [{
+                name: 'one',
+                comments: [{
+                    name: 'comment1'
+                }, {
+                    name: 'comment2'
+                }]
+            }, {
+                name: 'two',
+                comments: []
+            }]
+        };
+    }
+});
+
+/***/ }),
+/* 65 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(44)(
+  /* script */
+  null,
+  /* template */
+  __webpack_require__(66),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/opt/lampp/htdocs/vk-wall/resources/assets/js/components/Comment.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Comment.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-bd14c976", Component.options)
+  } else {
+    hotAPI.reload("data-v-bd14c976", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 66 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "row"
+  }, [_vm._v("\n    oi\n    " + _vm._s() + "\n")])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-bd14c976", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
