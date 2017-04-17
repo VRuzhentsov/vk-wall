@@ -1,12 +1,8 @@
 <template>
     <div class="row" >
-        <div class="col-md-12">
-            <div class="row" v-for="post in posts">
-                <div class="col-md-12">
-                    <div>Post</div>
-                    <comment v-for="comment in post.comments" is="comment" v-bind:item="comment" :key="comment"></comment>
-                </div>
-            </div>
+        <div class="col-md-12" v-for="post in posts">
+            <p>Wall Block</p>
+            <post-container :post="post"></post-container>
         </div>
     </div>
 
