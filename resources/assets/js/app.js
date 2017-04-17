@@ -7,26 +7,50 @@
 
 require('./bootstrap');
 
+import VueRouter from "vue-router";
+
+Vue.use(VueRouter);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', require('./components/Example.vue'));
+const welcome = Vue.component('welcome', require('./components/Welcome.vue'));
 
-Vue.component('asideblock', require('vue-strap/src/Aside.vue'));
+const appBlock = Vue.component('appBlock', require('./components/AppBlock.vue'));
 
-Vue.component('sidebar', require('./components/Sidebar.vue'));
+const asideBlock = Vue.component('asideBlock', require('vue-strap/src/Aside.vue'));
 
-Vue.component('wall', require('./components/Wall.vue'));
+const sidebar = Vue.component('sidebar', require('./components/Sidebar.vue'));
 
-Vue.component('actions', require('./components/Actions.vue'));
+const wall = Vue.component('wall', require('./components/Wall.vue'));
 
-Vue.component('post-container', require('./components/Post.vue'));
+const actions = Vue.component('actions', require('./components/Actions.vue'));
 
-Vue.component('comment-container', require('./components/Comment.vue'));
+const postContainer = Vue.component('postContainer', require('./components/Post.vue'));
+
+const commentContainer = Vue.component('commentContainer', require('./components/Comment.vue'));
+
+const router = new VueRouter({
+    routes: [
+        {
+            path: '/',
+            component: welcome
+        },
+        {
+            path: '/wall',
+            component: appBlock
+        },
+        {
+            path: '/wall/:userId:',
+            component: appBlock
+        },
+    ]
+});
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    router: router
 });

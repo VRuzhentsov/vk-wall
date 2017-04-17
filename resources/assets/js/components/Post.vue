@@ -1,10 +1,8 @@
 <template>
     <div class="row">
         <div class="col-md-12" v-for="comment in post.comments">
-            <p>
-                {{ post.name }}
-            </p>
-            <comment-container v-bind:comment="comment"></comment-container>
+            {{ post.name }}
+            <commentContainer v-bind:comment="comment"></commentContainer>
         </div>
     </div>
 </template>

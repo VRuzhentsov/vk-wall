@@ -1,11 +1,17 @@
 <template>
-    <div class="row" >
-        <div class="col-md-12" v-for="post in posts">
-            <p>Wall Block</p>
-            <post-container :post="post"></post-container>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <actions></actions>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" v-for="post in posts">
+                <p>Wall Block</p>
+                <postContainer :post="post"></postContainer>
+            </div>
         </div>
     </div>
-
 </template>
 
 <script>
