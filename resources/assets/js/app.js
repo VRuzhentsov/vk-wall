@@ -7,9 +7,17 @@
 
 require('./bootstrap');
 
-import VueRouter from "vue-router";
+import VueRouter from "vue-router"
+
+import Vuex from "vuex"
+
+window.HTTP = axios.create({
+    baseURL: 'http://127.0.0.1:8000/api/'
+});
 
 Vue.use(VueRouter);
+
+Vue.use(Vuex);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -18,6 +26,10 @@ Vue.use(VueRouter);
  */
 
 const welcome = Vue.component('welcome', require('./components/Welcome.vue'));
+
+const login = Vue.component('login', require('./components/Auth/Login.vue'));
+
+const register = Vue.component('register', require('./components/Auth/Register.vue'));
 
 const appBlock = Vue.component('appBlock', require('./components/AppBlock.vue'));
 
@@ -40,6 +52,14 @@ const router = new VueRouter({
             component: welcome
         },
         {
+            path: '/login',
+            component: login
+        },
+        {
+            path: '/register',
+            component: register
+        },
+        {
             path: '/wall',
             component: appBlock
         },
@@ -50,7 +70,47 @@ const router = new VueRouter({
     ]
 });
 
+const store = new Vuex.Store({
+    strict: true,
+    state: {
+        user: null,
+        authenticated: false
+    },
+    mutations: {
+        destroyLogin (state, payload) {
+            state.user = null;
+            state.authenticated = false;
+        },
+        setLogin (state, payload) {
+            console.log(payload);
+            state.user = payload.user;
+            state.authenticated = true;
+        }
+    },
+    actions: {
+        userHasLoggedOut ({commit}) {
+            commit('destroyLogin');
+        },
+        userHasLoggedIn ({commit, state}, payload) {
+            commit('setLogin', payload);
+        }
+    }
+});
+
 const app = new Vue({
     el: '#app',
-    router: router
+    store,
+    router: router,
+    ready: function () {
+
+    },
+    data: function () {
+        return {}
+    },
+    methods: {
+        logout: function () {
+            HTTP.post('/logout');
+            this.$store.dispatch('userHasLoggedOut');
+        }
+    }
 });

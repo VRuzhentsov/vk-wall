@@ -42,10 +42,25 @@ class UserAPIController extends AppBaseController
         $this->userRepository->pushCriteria(new RequestCriteria($request));
         $this->userRepository->pushCriteria(new LimitOffsetCriteria($request));
         $users = $this->userRepository->all();
-        
+
         return $this->sendResponse($users->toArray(), 'Users retrieved successfully');
     }
-    
+
+
+    /**
+     * Display Authenticated user
+     * GET|HEAD /user
+     *
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\JsonResponse|Response
+     */
+    public function authUser(Request $request)
+    {
+        return $this->sendResponse(\Auth::user(), 'Users retrieved successfully');
+    }
+
+
     /**
      * Store a newly created User in storage.
      * POST /users

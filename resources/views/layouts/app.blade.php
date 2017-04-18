@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ config('app.locale') }}">
+<html lang="{{ config('app.locale') }}" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -98,8 +98,25 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <router-link to="wall">Wall</router-link>
+                        <li v-if="! $store.state.authenticated">
+                            <router-link to="login">
+                                <i class="fa fa-btn fa-fw fa-sign-in"></i>&nbsp;Sign in</span>
+                            </router-link>
+                        </li>
+                        <li v-if="! $store.state.authenticated">
+                            <router-link to="register">
+                                <i class="fa fa-btn fa-fw fa-chevron-circle-up"></i>&nbsp;Register</span>
+                            </router-link>
+                        </li>
+                        <li v-if="$store.state.authenticated">
+                            <router-link to="wall">
+                                <i class="fa fa-btn fa-fw fa-user"></i>&nbsp;Wall</span>
+                            </router-link>
+                        </li>
+                        <li v-if="$store.state.authenticated">
+                            <a href="#/" v-on:click="logout">
+                                <i class="fa fa-btn fa-fw fa-user"></i>Logout</span>
+                            </a>
                         </li>
                     </ul>
                 </div>
