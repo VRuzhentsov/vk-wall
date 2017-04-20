@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\AppBaseController;
 use Auth;
+use DB;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Lcobucci\JWT\Parser;
 
 class LoginController extends AppBaseController
 {
@@ -37,7 +39,7 @@ class LoginController extends AppBaseController
      */
     public function __construct()
     {
-        $this->middleware('guest', ['except' => 'logout']);
+        //$this->middleware('guest', ['except' => 'logout']);
     }
 
 
@@ -50,13 +52,22 @@ class LoginController extends AppBaseController
      */
     public function logout(Request $request)
     {
-        $this->guard()->logout();
+        $value = $request->bearerToken();
+        $id = (new Parser())->parse($value)->getHeader('jti');
 
-        $request->session()->flush();
+        $token = DB::table('oauth_access_tokens')->where('id', '=', $id)->update(['revoked' => true]);
 
-        $request->session()->regenerate();
+        \Cookie::queue(\Cookie::forget('laravel_session'));
 
-        return Response::create(['authenticated' => false]);
+        \Session::flush();
+
+        $json = [
+            'success' => true,
+            'code'    => 200,
+            'message' => 'You are Logged out.',
+        ];
+
+        return response()->json($json, '200');
     }
 
 

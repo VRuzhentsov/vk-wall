@@ -9,15 +9,23 @@ require('./bootstrap');
 
 import VueRouter from "vue-router"
 
+import axios from 'axios'
+
+import VueAxios from 'vue-axios'
+
 import Vuex from "vuex"
 
-window.HTTP = axios.create({
-    baseURL: 'http://127.0.0.1:8000/api/'
-});
+import Auth from "./packages/auth/Auth.js"
+
+Vue.use(VueAxios, axios);
 
 Vue.use(VueRouter);
 
 Vue.use(Vuex);
+
+Vue.use(Auth);
+
+Vue.axios.defaults.baseURL = 'http://78.26.174.133/';
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -74,25 +82,32 @@ const store = new Vuex.Store({
     strict: true,
     state: {
         user: null,
-        authenticated: false
+        authenticated: false,
+        token: null
     },
     mutations: {
-        destroyLogin (state, payload) {
-            state.user = null;
+        destroyToken (state, payload) {
+            state.token = null;
             state.authenticated = false;
         },
-        setLogin (state, payload) {
-            console.log(payload);
-            state.user = payload.user;
+        setToken (state, payload) {
+            state.token = payload.token;
             state.authenticated = true;
+        },
+        updateUser (state, payload) {
+            state.user = payload.user;
         }
     },
     actions: {
         userHasLoggedOut ({commit}) {
-            commit('destroyLogin');
+            commit('destroyToken');
         },
         userHasLoggedIn ({commit, state}, payload) {
-            commit('setLogin', payload);
+            commit('setToken', payload);
+            Vue.axios.defaults.headers.common['Authorization'] = 'Bearer ' + state.token;
+        },
+        userUpdating ({commit, state}, payload) {
+            commit('updateUser', payload);
         }
     }
 });
@@ -100,17 +115,36 @@ const store = new Vuex.Store({
 const app = new Vue({
     el: '#app',
     store,
-    router: router,
-    ready: function () {
+    router,
+    created: function () {
+        let token = this.$auth.getToken();
 
+        if (token !== null) {
+            this.$store.dispatch('userHasLoggedIn', {token: token});
+            this.getUser();
+        } else {
+            this.$store.dispatch('userHasLoggedOut');
+        }
     },
     data: function () {
         return {}
     },
     methods: {
         logout: function () {
-            HTTP.post('/logout');
+            this.$http.post('/api/logout');
             this.$store.dispatch('userHasLoggedOut');
+        },
+        getUser: function () {
+            let that = this;
+            this.$http.get('/api/user').then(
+                function (response) {
+                    that.$store.dispatch('userUpdating', {user: response.data.data})
+                },
+                function (response) {
+                    that.$store.dispatch('userHasLoggedOut');
+                    that.$auth.destroyToken();
+                }
+            )
         }
     }
 });

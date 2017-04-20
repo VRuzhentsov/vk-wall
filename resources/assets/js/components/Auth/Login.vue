@@ -6,20 +6,12 @@
                     <div class="panel-heading">Login</div>
                     <div class="panel-body">
                         <form class="form-horizontal" role="form" v-on:submit.prevent="login">
-                            <!--{{ csrf_field() }}-->
-
                             <div class="form-group">
                                 <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="email" class="form-control" v-model="user.email" required
                                            autofocus>
-
-                                    <!--@if ($errors->has('email'))-->
-                                    <span class="help-block">
-                                        <!--<strong>{{ $errors->first('email') }}</strong>-->
-                                    </span>
-                                    <!--@endif-->
                                 </div>
                             </div>
 
@@ -29,11 +21,6 @@
                                 <div class="col-md-6">
                                     <input id="password" type="password" class="form-control" v-model="user.password"
                                            required>
-                                    <!--@if ($errors->has('password'))-->
-                                    <!--<span class="help-block">-->
-                                    <!--<strong>{{ $errors->first('password') }}</strong>-->
-                                    <!--</span>-->
-                                    <!--@endif-->
                                 </div>
                             </div>
 
@@ -52,10 +39,6 @@
                                     <button type="submit" class="btn btn-primary">
                                         Login
                                     </button>
-
-                                    <a class="btn btn-link" v-on:click.prevent="getUserData" href="">
-                                        Forgot Your Password?
-                                    </a>
                                 </div>
                             </div>
                         </form>
@@ -81,32 +64,31 @@
         methods: {
             login: function (event) {
                 let that = this;
-                that.loggingIn = true;
-                HTTP.post('/login', this.user).then(
-                    function (response) {
-                        that.$store.dispatch('userHasLoggedIn', {user: response.data.user});
-                        that.$router.push('wall');
-                    },
-                    function (response) {
-                        that.messages = [];
-                        if (response.status && response.status.code === 401) that.messages.push({
-                            type: 'danger',
-                            message: 'Sorry, you provided invalid credentials'
-                        });
-                        that.loggingIn = false
-                    }
-                )
+
+                let data = {
+                    client_id: 2,
+                    client_secret: 'KFhGbclXHPDcMyglktER2FJYVxVY40HZWwT0AM4r',
+                    grant_type: 'password',
+                    username: this.user.email,
+                    password: this.user.password
+                };
+
+                this.$http.post('/oauth/token', data)
+                    .then(response => {
+                            this.$auth.setToken(response.data.access_token, response.data.expires_in + Date.now());
+                            that.$store.dispatch('userHasLoggedIn', response.data.access_token);
+                            that.$router.push('wall');
+                        }
+                    )
             },
             getUserData: function () {
                 let that = this;
-                HTTP.get('/user').then(
+                this.$http.get('/api/user').then(
                     function (response) {
-                        console.log(that);
                         that.$dispatch('userHasLoggedIn', response.user);
-                        that.$route.router.go('/auth/profile')
                     },
                     function (response) {
-                        console.log(response)
+
                     }
                 )
             }

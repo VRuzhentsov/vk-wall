@@ -100,22 +100,23 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li v-if="! $store.state.authenticated">
                             <router-link to="login">
-                                <i class="fa fa-btn fa-fw fa-sign-in"></i>&nbsp;Sign in</span>
+                                <span><i class="fa fa-btn fa-fw fa-sign-in"></i>&nbsp;Sign in</span>
                             </router-link>
                         </li>
                         <li v-if="! $store.state.authenticated">
                             <router-link to="register">
-                                <i class="fa fa-btn fa-fw fa-chevron-circle-up"></i>&nbsp;Register</span>
+                                <span><i class="fa fa-btn fa-fw fa-chevron-circle-up"></i>&nbsp;Register</span>
                             </router-link>
                         </li>
+                        {{ Auth::user() }}
                         <li v-if="$store.state.authenticated">
                             <router-link to="wall">
-                                <i class="fa fa-btn fa-fw fa-user"></i>&nbsp;Wall</span>
+                                <span><i class="fa fa-btn fa-fw fa-user"></i>&nbsp;Wall</span>
                             </router-link>
                         </li>
                         <li v-if="$store.state.authenticated">
                             <a href="#/" v-on:click="logout">
-                                <i class="fa fa-btn fa-fw fa-user"></i>Logout</span>
+                                <span><i class="fa fa-btn fa-fw fa-user"></i>Logout</span>
                             </a>
                         </li>
                     </ul>

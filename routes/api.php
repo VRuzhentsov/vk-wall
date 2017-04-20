@@ -19,10 +19,10 @@ $api = app(Dingo\Api\Routing\Router::class);
 $api->version('v1', ['namespace' => '\App\Http\Controllers', 'middleware' => 'api'], function ($api) {
     /** @var \Dingo\Api\Routing\Router $api */
 
-    $api->group(['middleware' => 'auth', 'provider' => 'basic'], function ($api) {
+    $api->group(['middleware' => 'auth:api', 'provider' => 'basic'], function ($api) {
         /** @var \Dingo\Api\Routing\Router $api */
         $api->get('user', 'API\UserAPIController@authUser');
-        $api->resource('users', App\Http\Controllers\API\UserAPIController::class);
+        $api->resource('users', '\App\Http\Controllers\API\UserAPIController');
     });
 
     $api->post('login', 'Auth\LoginController@login');
@@ -30,8 +30,8 @@ $api->version('v1', ['namespace' => '\App\Http\Controllers', 'middleware' => 'ap
 
     $api->post('register', 'Auth\RegisterController@register');
 
-    $api->post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-    $api->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-    $api->post('password/reset', 'Auth\ResetPasswordController@reset');
+    //$api->post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+    //$api->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+    //$api->post('password/reset', 'Auth\ResetPasswordController@reset');
 
 });
