@@ -39,7 +39,8 @@ trait MakeCommentTrait
 
         return array_merge([
             'content'    => $fake->text,
-            'parent_id'  => null,
+            '_lft'       => 1,
+            '_rgt'       => 2,
             'author_id'  => isset($commentFields['author_id']) ? $commentFields['author_id'] : null,
             'created_at' => $fake->date('Y-m-d H:i:s'),
             'updated_at' => $fake->date('Y-m-d H:i:s')
