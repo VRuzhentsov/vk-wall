@@ -6,9 +6,8 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12" v-for="post in posts">
-                <p>Wall Block</p>
-                <postContainer :post="post"></postContainer>
+            <div class="col-md-12" v-for="comment in comments">
+                <commentContainer :comment="comment"></commentContainer>
             </div>
         </div>
     </div>
@@ -16,26 +15,33 @@
 
 <script>
     export default {
-        data:function () {
+        data: function () {
             return {
-                posts:[
-                    {
-                        name:'one',
-                        comments:[
-                            {
-                                name:'comment1'
-                            },{
-                                name:'comment2'
-                            }
-                        ]
-                    },{
-                        name:'two',
-                        comments:[
-
-                        ]
-                    }
-                ]
+                comments: []
             };
+        },
+        created() {
+            this.fetchComments();
+        },
+        mounted: function () {
+            Echo.channel('boss-river-135')
+                .listen('CommentPosted', (data) => {
+                    console.log(data);
+                    // Push ata to posts list.
+                    this.comments.push({
+                        message: data.chatMessage.message,
+                        username: data.user.name
+                    });
+                });
+        },
+        methods: {
+            fetchComments() {
+                let that = this;
+                this.$http.get('/api/comments')
+                    .then(function (response) {
+                        that.comments = response.data.data;
+                    });
+            },
         }
     }
 </script>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Events\CommentPosted;
 use App\Http\Requests\API\CreateCommentAPIRequest;
 use App\Http\Requests\API\UpdateCommentAPIRequest;
 use App\Models\Comment;
@@ -41,7 +42,7 @@ class CommentAPIController extends AppBaseController
     {
         $this->commentRepository->pushCriteria(new RequestCriteria($request));
         $this->commentRepository->pushCriteria(new LimitOffsetCriteria($request));
-        $comments = $this->commentRepository->all();
+        $comments = $this->commentRepository->with('author')->all();
 
         return $this->sendResponse($comments->toArray(), 'Comments retrieved successfully');
     }
@@ -59,9 +60,15 @@ class CommentAPIController extends AppBaseController
     {
         $input = $request->all();
 
-        $comments = $this->commentRepository->create($input);
+        $user = \Auth::user();
 
-        return $this->sendResponse($comments->toArray(), 'Comment saved successfully');
+        $input['author_id'] = $user->id;
+
+        $comment = $this->commentRepository->create($input);
+
+        broadcast(new CommentPosted($comment, $user))->toOthers();
+
+        return $this->sendResponse($comment->toArray(), 'Comment saved successfully');
     }
 
 

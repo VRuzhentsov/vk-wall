@@ -15,6 +15,10 @@ import VueAxios from 'vue-axios'
 
 import Vuex from "vuex"
 
+import Pusher from "pusher-js"
+
+import Echo from "laravel-echo"
+
 import Auth from "./packages/auth/Auth.js"
 
 Vue.use(VueAxios, axios);
@@ -26,6 +30,13 @@ Vue.use(Vuex);
 Vue.use(Auth);
 
 Vue.axios.defaults.baseURL = 'http://78.26.174.133/';
+
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: '02a42a3a470e09dd6bc2',
+    cluster: 'eu',
+    encrypted: true
+});
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -48,8 +59,6 @@ const sidebar = Vue.component('sidebar', require('./components/Sidebar.vue'));
 const wall = Vue.component('wall', require('./components/Wall.vue'));
 
 const actions = Vue.component('actions', require('./components/Actions.vue'));
-
-const postContainer = Vue.component('postContainer', require('./components/Post.vue'));
 
 const commentContainer = Vue.component('commentContainer', require('./components/Comment.vue'));
 

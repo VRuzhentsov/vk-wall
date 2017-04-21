@@ -1,9 +1,9 @@
 <template>
     <div class="row">
         <div class="col-md-12">
-            <p>
-                {{ comment.name }}
-            </p>
+            <div :id="comment.id">
+                <p>{{ comment.content }}</p>
+            </div>
         </div>
     </div>
 </template>
