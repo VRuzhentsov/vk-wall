@@ -37,7 +37,7 @@ trait MakeUserTrait
         
         return array_merge([
             'name'           => $fake->word,
-            'email'          => $fake->word,
+            'email'          => $fake->email,
             'password'       => $fake->word,
             'remember_token' => $fake->word,
             'created_at'     => $fake->date('Y-m-d H:i:s'),

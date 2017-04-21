@@ -28,7 +28,9 @@ trait ApiTestTrait
     public function assertModelData(Array $actualData, Array $expectedData)
     {
         foreach ($actualData as $key => $value) {
-            $this->assertEquals($expectedData[$key], $actualData[$key]);
+            if ( ! in_array($key, ['password', 'remember_token'])) {
+                $this->assertEquals($expectedData[$key], $actualData[$key]);
+            }
         }
     }
 }

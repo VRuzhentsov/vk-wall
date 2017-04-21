@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-class FrontendController extends Controller
+class FrontendController extends AppBaseController
 {
     /**
      * Create a new controller instance.
