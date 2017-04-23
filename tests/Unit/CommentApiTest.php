@@ -30,13 +30,15 @@ class CommentApiTest extends TestCase
      */
     public function testIndexComment()
     {
+        $owner = $this->makeUser();
         $user = $this->makeUser();
         $commentFields = [
+            'owner_id'  => $owner->id,
             'author_id' => $user->id
         ];
         $comment = $this->makeComment($commentFields);
 
-        $this->response = $this->json('get', '/api/comments', [], $this->headers($user));
+        $this->response = $this->json('get', '/api/users/'.$owner->id.'/comments', [], $this->headers($user));
 
         $this->assertApiResponse([]);
     }
@@ -65,12 +67,40 @@ class CommentApiTest extends TestCase
      */
     public function testCreateComment()
     {
+        $owner = $this->makeUser();
         $user = $this->makeUser();
         $commentFields = [
+            'owner_id'  => $owner->id,
             'author_id' => $user->id
         ];
         $comment = $this->fakeCommentData($commentFields);
-        $this->response = $this->json('POST', '/api/comments', $comment, $this->headers($user));
+        $this->response = $this->json('POST', '/api/users/'.$owner->id.'/comments', $comment, $this->headers($user));
+
+        $this->assertApiResponse($comment);
+    }
+
+
+    /**
+     * @test
+     */
+    public function testCreateCommentChildren()
+    {
+        $owner = $this->makeUser();
+        $user = $this->makeUser();
+        $commentParentFields = [
+            'owner_id'  => $owner->id,
+            'author_id' => $user->id
+        ];
+
+        $commentParent = $this->makeComment($commentParentFields);
+        $commentFields = [
+            'owner_id'  => $owner->id,
+            'author_id' => $user->id
+        ];
+
+        $comment = $this->fakeCommentData($commentFields);
+        $this->response = $this->json('POST', '/api/users/'.$owner->id.'/comments/'.$commentParent->id.'/children',
+            $comment, $this->headers($user));
 
         $this->assertApiResponse($comment);
     }
@@ -81,12 +111,15 @@ class CommentApiTest extends TestCase
      */
     public function testReadComment()
     {
+        $owner = $this->makeUser();
         $user = $this->makeUser();
         $commentFields = [
+            'owner_id'  => $owner->id,
             'author_id' => $user->id
         ];
         $comment = $this->makeComment($commentFields);
-        $this->response = $this->json('GET', '/api/comments/'.$comment->id, [], $this->headers($user));
+        $this->response = $this->json('GET', '/api/users/'.$owner->id.'/comments/'.$comment->id, [],
+            $this->headers($user));
 
         $this->assertApiResponse($comment->toArray());
     }
@@ -97,14 +130,17 @@ class CommentApiTest extends TestCase
      */
     public function testUpdateComment()
     {
+        $owner = $this->makeUser();
         $user = $this->makeUser();
         $commentFields = [
+            'owner_id'  => $owner->id,
             'author_id' => $user->id
         ];
         $comment = $this->makeComment($commentFields);
         $editedComment = $this->fakeCommentData($commentFields);
 
-        $this->response = $this->json('PUT', '/api/comments/'.$comment->id, $editedComment, $this->headers($user));
+        $this->response = $this->json('PUT', '/api/users/'.$owner->id.'/comments/'.$comment->id, $editedComment,
+            $this->headers($user));
 
         $this->assertApiResponse($editedComment);
     }
@@ -115,15 +151,19 @@ class CommentApiTest extends TestCase
      */
     public function testDeleteComment()
     {
+        $owner = $this->makeUser();
         $user = $this->makeUser();
         $commentFields = [
+            'owner_id'  => $owner->id,
             'author_id' => $user->id
         ];
         $comment = $this->makeComment($commentFields);
-        $this->response = $this->json('DELETE', '/api/comments/'.$comment->id, [], $this->headers($user));
+        $this->response = $this->json('DELETE', '/api/users/'.$owner->id.'/comments/'.$comment->id, [],
+            $this->headers($user));
 
         $this->assertApiSuccess();
-        $this->response = $this->json('GET', '/api/comments/'.$comment->id, [], $this->headers($user));
+        $this->response = $this->json('GET', '/api/users/'.$owner->id.'/comments/'.$comment->id, [],
+            $this->headers($user));
 
         $this->response->assertStatus(404);
     }

@@ -76,8 +76,11 @@
                 this.$http.post('/oauth/token', data)
                     .then(response => {
                             this.$auth.setToken(response.data.access_token, response.data.expires_in + Date.now());
-                        that.$store.dispatch('userHasLoggedIn', {token: response.data.access_token});
-                            that.$router.push('wall');
+                            that.$store.dispatch('userHasLoggedIn', {token: response.data.access_token})
+                                .then(function () {
+//                                    that.$router.push('wall/' + that.$store.state.user.id)
+                                });
+
                         }
                     )
             },

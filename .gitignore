@@ -11,3 +11,4 @@ Homestead.yaml
 /.phpstorm.meta.php
 /public/fonts/*
 /public/js/app.js
+/public/css/app.css

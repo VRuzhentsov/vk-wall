@@ -24,9 +24,11 @@ $api->version('v1', ['namespace' => '\App\Http\Controllers', 'middleware' => 'ap
         $api->get('user', 'API\UserAPIController@authUser');
         $api->resource('users', '\App\Http\Controllers\API\UserAPIController');
 
-        $api->post('comments/{comment}/children',
-            'API\CommentAPIController@storeCommentsChildren')->name('comments.store.children');
-        $api->resource('comments', '\App\Http\Controllers\API\CommentAPIController');
+        $api->group(['prefix' => 'users/{ownerId}'], function ($api) {
+            $api->post('comments/{comment}/children',
+                'API\CommentAPIController@storeCommentsChildren')->name('comments.store.children');
+            $api->resource('comments', '\App\Http\Controllers\API\CommentAPIController');
+        });
     });
 
     $api->post('login', 'Auth\LoginController@login');

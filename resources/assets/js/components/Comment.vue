@@ -2,7 +2,9 @@
     <li class="comment">
         <div :id="comment.id" class="comment-body">
             <div class="info">
-                <div class="author-name">{{ comment.author.name }}</div>
+                <router-link :to="{ name: 'wall', params: { userId: comment.author.id } }">
+                    <div class="author-name">{{ comment.author.name }}</div>
+                </router-link>
                 <div class="comment-updated_at">{{ comment.updated_at | moment }}</div>
             </div>
             <div class="message">
@@ -38,7 +40,13 @@
                 let data = {
                     content: this.commentInput
                 };
-                this.$http.post('api/comments/' + this.comment.id + '/children', data)
+                let userId = undefined;
+                if (that.$route.params.userId) {
+                    userId = that.$route.params.userId;
+                } else {
+                    userId = that.$store.state.user.id
+                }
+                this.$http.post('api/users/' + userId + '/comments/' + this.comment.id + '/children', data)
                     .then(function (response) {
                         that.commentInput = '';
                     })

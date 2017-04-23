@@ -52,8 +52,6 @@ const register = Vue.component('register', require('./components/Auth/Register.v
 
 const appBlock = Vue.component('appBlock', require('./components/AppBlock.vue'));
 
-const asideBlock = Vue.component('asideBlock', require('vue-strap/src/Aside.vue'));
-
 const sidebar = Vue.component('sidebar', require('./components/Sidebar.vue'));
 
 const wall = Vue.component('wall', require('./components/Wall.vue'));
@@ -61,6 +59,8 @@ const wall = Vue.component('wall', require('./components/Wall.vue'));
 const actions = Vue.component('actions', require('./components/Actions.vue'));
 
 const commentContainer = Vue.component('commentContainer', require('./components/Comment.vue'));
+
+const navBlock = Vue.component('navBlock', require('./components/NavBlock.vue'));
 
 const router = new VueRouter({
     routes: [
@@ -78,11 +78,18 @@ const router = new VueRouter({
         },
         {
             path: '/wall',
-            component: appBlock
+            component: wall,
+            meta: {
+                requiresAuth: true
+            }
         },
         {
-            path: '/wall/:userId:',
-            component: appBlock
+            path: '/wall/:userId',
+            component: wall,
+            name: 'wall',
+            meta: {
+                requiresAuth: true
+            }
         },
     ]
 });
@@ -121,6 +128,22 @@ const store = new Vuex.Store({
     }
 });
 
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        // this route requires auth, check if logged in
+        // if not, redirect to login page.
+        if (!store.state.authenticated) {
+            next({
+                path: '/'
+            })
+        } else {
+            next()
+        }
+    } else {
+        next() // make sure to always call next()!
+    }
+});
+
 const app = new Vue({
     el: '#app',
     store,
@@ -139,10 +162,6 @@ const app = new Vue({
         return {}
     },
     methods: {
-        logout: function () {
-            this.$http.post('/api/logout');
-            this.$store.dispatch('userHasLoggedOut');
-        },
         getUser: function () {
             let that = this;
             this.$http.get('/api/user').then(

@@ -1,9 +1,14 @@
 <template>
     <div>
-        <!--<asideBlock :show=true placement="left" header="Users list">-->
-            <!--<sidebar></sidebar>-->
-        <!--</asideBlock>-->
-
-        <wall></wall>
+        <nav-block></nav-block>
+        <router-view></router-view>
     </div>
 </template>
+
+<script>
+    export default {
+        data: function () {
+            return {}
+        }
+    }
+</script>

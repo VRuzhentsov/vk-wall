@@ -1,6 +1,6 @@
 <template>
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-12">
             <p>Actions block</p>
             <form class="form-group" @keyup.enter="comment" v-on:submit.prevent="comment">
                 <textarea class="form-control" title="Comment" v-model="message"/>
@@ -23,7 +23,13 @@
                 let data = {
                     content: this.message
                 };
-                this.$http.post('api/comments', data)
+                let userId = undefined;
+                if (that.$route.params.userId) {
+                    userId = that.$route.params.userId;
+                } else {
+                    userId = that.$store.state.user.id
+                }
+                this.$http.post('api/users/' + userId + '/comments', data)
                     .then(function (response) {
                         that.message = '';
                     })

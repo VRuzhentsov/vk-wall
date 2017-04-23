@@ -35,7 +35,7 @@ class UserRepositoryTest extends TestCase
         $this->assertArrayHasKey('id', $createdUser);
         $this->assertNotNull($createdUser['id'], 'Created User must have id specified');
         $this->assertNotNull(User::find($createdUser['id']), 'User with given id must be in DB');
-        $this->assertModelData($user, $createdUser);
+        $this->assertModelData($createdUser, $user);
     }
     
     /**
@@ -46,7 +46,7 @@ class UserRepositoryTest extends TestCase
         $user = $this->makeUser();
         $dbUser = $this->userRepo->find($user->id);
         $dbUser = $dbUser->toArray();
-        $this->assertModelData($user->toArray(), $dbUser);
+        $this->assertModelData($dbUser, $user->toArray());
     }
     
     /**
@@ -57,9 +57,9 @@ class UserRepositoryTest extends TestCase
         $user = $this->makeUser();
         $fakeUser = $this->fakeUserData();
         $updatedUser = $this->userRepo->update($fakeUser, $user->id);
-        $this->assertModelData($fakeUser, $updatedUser->toArray());
+        $this->assertModelData($updatedUser->toArray(), $fakeUser);
         $dbUser = $this->userRepo->find($user->id);
-        $this->assertModelData($fakeUser, $dbUser->toArray());
+        $this->assertModelData($dbUser->toArray(), $fakeUser);
     }
     
     /**

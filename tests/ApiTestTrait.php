@@ -16,7 +16,7 @@ trait ApiTestTrait
         $responseData = isset($response['data'][0]) ? $response['data'][0] : $response['data'];
         
         $this->assertNotEmpty($responseData['id']);
-        $this->assertModelData($actualData, $responseData);
+        $this->assertModelData($responseData, $actualData);
     }
     
     public function assertApiSuccess()
@@ -27,9 +27,9 @@ trait ApiTestTrait
     
     public function assertModelData(Array $actualData, Array $expectedData)
     {
-        foreach ($actualData as $key => $value) {
+        foreach ($expectedData as $key => $value) {
             if ( ! in_array($key, ['password', 'remember_token'])) {
-                $this->assertEquals($expectedData[$key], $actualData[$key]);
+                $this->assertEquals($actualData[$key], $expectedData[$key]);
             }
         }
     }

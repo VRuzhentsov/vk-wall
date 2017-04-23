@@ -7,7 +7,9 @@ use App\Events\CommentPosted;
 use App\Http\Requests\API\CreateCommentAPIRequest;
 use App\Http\Requests\API\UpdateCommentAPIRequest;
 use App\Models\Comment;
+use App\Models\User;
 use App\Repositories\CommentRepository;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use InfyOm\Generator\Criteria\LimitOffsetCriteria;
@@ -33,15 +35,20 @@ class CommentAPIController extends AppBaseController
 
     /**
      * Display a listing of the Comment.
-     * GET|HEAD /comments
+     * GET|HEAD /user/{ownerId}/comments
      *
+     * @param         $ownerId
      * @param Request $request
      *
      * @return Response
      */
-    public function index(Request $request)
+    public function index($ownerId, Request $request)
     {
-        $comments = Comment::whereIsRoot()->get();
+        /** @var User $owner */
+        $owner = User::find($ownerId);
+
+        /** @var Collection $comments */
+        $comments = Comment::where('owner_id', '=', $owner->id)->whereIsRoot()->get();
 
         return $this->sendResponse($comments->toArray(), 'Comments retrieved successfully');
     }
@@ -49,20 +56,28 @@ class CommentAPIController extends AppBaseController
 
     /**
      * Store a newly created Comment in storage.
-     * POST /comments
+     * POST /user/{ownerId}/comments
      *
+     * @param                         $ownerId
      * @param CreateCommentAPIRequest $request
      *
      * @return Response
      */
-    public function store(CreateCommentAPIRequest $request)
+    public function store($ownerId, CreateCommentAPIRequest $request)
     {
         $input = $request->all();
 
+        /** @var User $owner */
+        $owner = User::find($ownerId);
+
+        /** @var User $user */
         $user = \Auth::user();
+
+        $input['owner_id'] = $owner->id;
 
         $input['author_id'] = $user->id;
 
+        /** @var Comment $comment */
         $comment = $this->commentRepository->create($input);
 
         broadcast(new CommentPosted($comment, $user))->toOthers();
@@ -73,24 +88,29 @@ class CommentAPIController extends AppBaseController
 
     /**
      * Store a newly created Child Comment in storage.
-     * POST /comments/{comment}/children
+     * POST /user/{ownerId}/comments/{comment}/children
      *
+     * @param                         $ownerId
      * @param                         $commentId
      * @param CreateCommentAPIRequest $request
      *
      * @return Response
      */
-    public function storeCommentsChildren($commentId, CreateCommentAPIRequest $request)
+    public function storeCommentsChildren($ownerId, $commentId, CreateCommentAPIRequest $request)
     {
         $input = $request->all();
 
         /** @var Comment $comment */
         $parentComment = $this->commentRepository->findWithoutFail($commentId);
 
+        /** @var User $user */
         $user = \Auth::user();
+
+        $input['owner_id'] = $parentComment->owner_id;
 
         $input['author_id'] = $user->id;
 
+        /** @var Comment $comment */
         $comment = $this->commentRepository->create($input);
 
         $parentComment->appendNode($comment);
@@ -103,13 +123,14 @@ class CommentAPIController extends AppBaseController
 
     /**
      * Display the specified Comment.
-     * GET|HEAD /comments/{id}
+     * GET|HEAD /user/{ownerId}/comments/{id}
      *
+     * @param      $ownerId
      * @param  int $id
      *
      * @return Response
      */
-    public function show($id)
+    public function show($ownerId, $id)
     {
         /** @var Comment $comment */
         $comment = $this->commentRepository->findWithoutFail($id);
@@ -124,14 +145,15 @@ class CommentAPIController extends AppBaseController
 
     /**
      * Update the specified Comment in storage.
-     * PUT/PATCH /comments/{id}
+     * PUT/PATCH /user/{ownerId}/comments/{id}
      *
+     * @param                         $ownerId
      * @param  int                    $id
      * @param UpdateCommentAPIRequest $request
      *
      * @return Response
      */
-    public function update($id, UpdateCommentAPIRequest $request)
+    public function update($ownerId, $id, UpdateCommentAPIRequest $request)
     {
         $input = $request->all();
 
@@ -150,13 +172,14 @@ class CommentAPIController extends AppBaseController
 
     /**
      * Remove the specified Comment from storage.
-     * DELETE /comments/{id}
+     * DELETE /user/{ownerId}/comments/{id}
      *
+     * @param      $ownerId
      * @param  int $id
      *
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($ownerId, $id)
     {
         /** @var Comment $comment */
         $comment = $this->commentRepository->findWithoutFail($id);

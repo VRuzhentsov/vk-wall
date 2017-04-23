@@ -34,6 +34,9 @@ use Kalnoy\Nestedset\NodeTrait;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Comment whereRgt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Comment whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int                   $owner_id
+ * @property-read \App\Models\User $owner
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Comment whereOwnerId($value)
  */
 class Comment extends Model
 {
@@ -54,6 +57,7 @@ class Comment extends Model
     public $fillable = [
         'content',
         'parent_id',
+        'owner_id',
         'author_id',
         'created_at',
         'updated_at'
@@ -74,6 +78,7 @@ class Comment extends Model
     protected $casts = [
         'content'   => 'string',
         'parent_id' => 'integer',
+        'owner_id'  => 'integer',
         'author_id' => 'integer'
     ];
 
@@ -86,6 +91,17 @@ class Comment extends Model
     public function author()
     {
         return $this->belongsTo(User::class, 'author_id');
+    }
+
+
+    /**
+     * Owner relation
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'owner_id');
     }
 
 }

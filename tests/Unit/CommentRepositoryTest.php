@@ -31,8 +31,10 @@ class CommentRepositoryTest extends TestCase
      */
     public function testCreateComment()
     {
+        $owner = $this->makeUser();
         $user = $this->makeUser();
         $commentFields = [
+            'owner_id'  => $owner->id,
             'author_id' => $user->id
         ];
         $comment = $this->fakeCommentData($commentFields);
@@ -41,7 +43,7 @@ class CommentRepositoryTest extends TestCase
         $this->assertArrayHasKey('id', $createdComment);
         $this->assertNotNull($createdComment['id'], 'Created Comment must have id specified');
         $this->assertNotNull(Comment::find($createdComment['id']), 'Comment with given id must be in DB');
-        $this->assertModelData($comment, $createdComment);
+        $this->assertModelData($createdComment, $comment);
     }
 
 
@@ -57,7 +59,7 @@ class CommentRepositoryTest extends TestCase
         $comment = $this->makeComment($commentFields);
         $dbComment = $this->commentRepo->find($comment->id);
         $dbComment = $dbComment->toArray();
-        $this->assertModelData($comment->toArray(), $dbComment);
+        $this->assertModelData($dbComment, $comment->toArray());
     }
 
 
@@ -73,9 +75,9 @@ class CommentRepositoryTest extends TestCase
         $comment = $this->makeComment($commentFields);
         $fakeComment = $this->fakeCommentData($commentFields);
         $updatedComment = $this->commentRepo->update($fakeComment, $comment->id);
-        $this->assertModelData($fakeComment, $updatedComment->toArray());
+        $this->assertModelData($updatedComment->toArray(), $fakeComment);
         $dbComment = $this->commentRepo->find($comment->id);
-        $this->assertModelData($fakeComment, $dbComment->toArray());
+        $this->assertModelData($dbComment->toArray(), $fakeComment);
     }
 
 
