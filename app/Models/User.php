@@ -18,7 +18,9 @@ use Laravel\Passport\HasApiTokens;
  * @property \Carbon\Carbon                                                                                                 $created_at
  * @property \Carbon\Carbon                                                                                                 $updated_at
  * @property \Carbon\Carbon                                                                                                 $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Client[]                                       $clients
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Token[]                                        $tokens
  * @method static \Illuminate\Database\Query\Builder|\App\Models\User whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\User whereDeletedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\User whereEmail($value)

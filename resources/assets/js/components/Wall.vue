@@ -1,14 +1,10 @@
 <template>
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <actions></actions>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12" v-for="comment in comments">
-                <commentContainer :comment="comment"></commentContainer>
-            </div>
+        <actions></actions>
+        <div class="row ">
+            <ul class="col-md-9 list-unstyled comments-block">
+                <commentContainer v-for="comment in comments" :comment="comment"></commentContainer>
+            </ul>
         </div>
     </div>
 </template>

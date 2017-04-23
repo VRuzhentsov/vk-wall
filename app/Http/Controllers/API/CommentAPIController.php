@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Events\CommentChildPosted;
 use App\Events\CommentPosted;
 use App\Http\Requests\API\CreateCommentAPIRequest;
 use App\Http\Requests\API\UpdateCommentAPIRequest;
@@ -40,9 +41,7 @@ class CommentAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $this->commentRepository->pushCriteria(new RequestCriteria($request));
-        $this->commentRepository->pushCriteria(new LimitOffsetCriteria($request));
-        $comments = $this->commentRepository->with('author')->all();
+        $comments = Comment::whereIsRoot()->get();
 
         return $this->sendResponse($comments->toArray(), 'Comments retrieved successfully');
     }
@@ -67,6 +66,36 @@ class CommentAPIController extends AppBaseController
         $comment = $this->commentRepository->create($input);
 
         broadcast(new CommentPosted($comment, $user))->toOthers();
+
+        return $this->sendResponse($comment->toArray(), 'Comment saved successfully');
+    }
+
+
+    /**
+     * Store a newly created Child Comment in storage.
+     * POST /comments/{comment}/children
+     *
+     * @param                         $commentId
+     * @param CreateCommentAPIRequest $request
+     *
+     * @return Response
+     */
+    public function storeCommentsChildren($commentId, CreateCommentAPIRequest $request)
+    {
+        $input = $request->all();
+
+        /** @var Comment $comment */
+        $parentComment = $this->commentRepository->findWithoutFail($commentId);
+
+        $user = \Auth::user();
+
+        $input['author_id'] = $user->id;
+
+        $comment = $this->commentRepository->create($input);
+
+        $parentComment->appendNode($comment);
+
+        broadcast(new CommentChildPosted($comment, $user))->toOthers();
 
         return $this->sendResponse($comment->toArray(), 'Comment saved successfully');
     }

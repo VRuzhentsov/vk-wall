@@ -23,6 +23,9 @@ $api->version('v1', ['namespace' => '\App\Http\Controllers', 'middleware' => 'ap
         /** @var \Dingo\Api\Routing\Router $api */
         $api->get('user', 'API\UserAPIController@authUser');
         $api->resource('users', '\App\Http\Controllers\API\UserAPIController');
+
+        $api->post('comments/{comment}/children',
+            'API\CommentAPIController@storeCommentsChildren')->name('comments.store.children');
         $api->resource('comments', '\App\Http\Controllers\API\CommentAPIController');
     });
 
