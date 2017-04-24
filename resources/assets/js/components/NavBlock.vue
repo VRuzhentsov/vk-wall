@@ -35,7 +35,7 @@
                         </router-link>
                     </li>
                     <li v-if="$store.state.authenticated">
-                        <router-link :to="{ path: 'wall' }">
+                        <router-link :to="{ path: '/wall' }">
                             <span><i class="fa fa-btn fa-fw fa-user"></i>Wall</span>
                         </router-link>
                     </li>
@@ -54,11 +54,9 @@
     export default {
         data: function () {
             return {
-                user: {}
             }
         },
         mounted: function () {
-            this.user = this.$store.state.user;
         },
         methods: {
             logout: function () {

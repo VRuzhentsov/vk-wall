@@ -12,5 +12,6 @@
 */
 
 Broadcast::channel('boss-river-135', function ($user, $id) {
+    Log::info('run channel');
     return (int) $user->id === (int) $id;
 });

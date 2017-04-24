@@ -48,7 +48,7 @@ class CommentAPIController extends AppBaseController
         $owner = User::find($ownerId);
 
         /** @var Collection $comments */
-        $comments = Comment::where('owner_id', '=', $owner->id)->whereIsRoot()->get();
+        $comments = Comment::where('owner_id', '=', $owner->id)->whereIsRoot()->orderByDesc('updated_at')->get();
 
         return $this->sendResponse($comments->toArray(), 'Comments retrieved successfully');
     }
@@ -80,7 +80,7 @@ class CommentAPIController extends AppBaseController
         /** @var Comment $comment */
         $comment = $this->commentRepository->create($input);
 
-        broadcast(new CommentPosted($comment, $user))->toOthers();
+        event(new CommentPosted($comment, $user));
 
         return $this->sendResponse($comment->toArray(), 'Comment saved successfully');
     }
@@ -115,7 +115,7 @@ class CommentAPIController extends AppBaseController
 
         $parentComment->appendNode($comment);
 
-        broadcast(new CommentChildPosted($comment, $user))->toOthers();
+        event(new CommentChildPosted($comment, $user));
 
         return $this->sendResponse($comment->toArray(), 'Comment saved successfully');
     }

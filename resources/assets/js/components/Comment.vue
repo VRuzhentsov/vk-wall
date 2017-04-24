@@ -49,6 +49,7 @@
                 this.$http.post('api/users/' + userId + '/comments/' + this.comment.id + '/children', data)
                     .then(function (response) {
                         that.commentInput = '';
+                        that.renderInput = !that.renderInput;
                     })
             },
             moment: function () {

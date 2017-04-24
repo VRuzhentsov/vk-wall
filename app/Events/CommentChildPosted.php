@@ -2,6 +2,8 @@
 
 namespace App\Events;
 
+use App\Models\Comment;
+use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -10,20 +12,32 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class CommentChildPosted
+class CommentChildPosted implements ShouldBroadcast
 {
 
     use Dispatchable, InteractsWithSockets, SerializesModels;
+
+    /**
+     * @var Comment
+     */
+    public $comment;
+
+    /**
+     * @var User
+     */
+    public $user;
 
 
     /**
      * Create a new event instance.
      *
-     * @return void
+     * @param Comment $comment
+     * @param User    $user
      */
-    public function __construct()
+    public function __construct(Comment $comment, User $user)
     {
-        //
+        $this->comment = $comment;
+        $this->user = $user;
     }
 
 
@@ -34,6 +48,6 @@ class CommentChildPosted
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        return new Channel('boss-river-135');
     }
 }
