@@ -49,7 +49,7 @@ class Comment extends Model
      * @var array
      */
     public static $rules = [
-
+        'content' => 'required|min:5|max:10000'
     ];
 
     public $table = 'comments';

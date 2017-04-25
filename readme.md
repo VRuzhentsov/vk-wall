@@ -6,6 +6,7 @@ $cp .env.example .env
 
 $compser update
 $php artisan migrate 
+$php artisan passport:keys 
 $npm install
 $npm run dev
 ```
