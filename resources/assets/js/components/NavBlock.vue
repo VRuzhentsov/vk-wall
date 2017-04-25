@@ -41,7 +41,7 @@
                     </li>
                     <li v-if="$store.state.authenticated">
                         <a href="#/" v-on:click="logout">
-                            <span><i class="fa fa-btn fa-fw fa-user"></i>Logout</span>
+                            <span><i class="fa fa-btn fa-fw fa-sign-out"></i>Logout</span>
                         </a>
                     </li>
                 </ul>

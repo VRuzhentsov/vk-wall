@@ -21,6 +21,8 @@ import Echo from "laravel-echo"
 
 import Auth from "./packages/auth/Auth.js"
 
+import Config from "./config/default.js"
+
 Vue.use(VueAxios, axios);
 
 Vue.use(VueRouter);
@@ -29,11 +31,14 @@ Vue.use(Vuex);
 
 Vue.use(Auth);
 
-Vue.axios.defaults.baseURL = 'http://78.26.174.133/';
+Vue.use(Config);
+
+
+Vue.axios.defaults.baseURL = Vue.config.api.url;
 
 window.Echo = new Echo({
     broadcaster: 'pusher',
-    key: '02a42a3a470e09dd6bc2',
+    key: Vue.config.pusher.key,
     cluster: 'eu',
     encrypted: true
 });
@@ -105,6 +110,7 @@ const store = new Vuex.Store({
         destroyToken (state, payload) {
             state.token = null;
             state.authenticated = false;
+            state.user = null;
         },
         setToken (state, payload) {
             state.token = payload.token;

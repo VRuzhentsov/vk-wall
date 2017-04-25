@@ -1,0 +1,12 @@
+module.exports = {
+    pusher: {
+        key: 'pushe_key',
+    },
+    api: {
+        url: 'http://localhost/'
+    },
+    auth: {
+        client_id: '2',
+        client_secret: 'secret'
+    }
+};

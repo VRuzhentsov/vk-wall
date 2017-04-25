@@ -12,15 +12,21 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class CommentChildPosted implements ShouldBroadcast
+class CommentDeleted implements ShouldBroadcast
 {
 
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
-     * @var Comment
+     * @var int
      */
-    public $comment;
+    public $id;
+
+    /**
+     * @var int
+     */
+    public $parent;
+
 
     /**
      * @var User
@@ -31,12 +37,14 @@ class CommentChildPosted implements ShouldBroadcast
     /**
      * Create a new event instance.
      *
-     * @param Comment $comment
-     * @param User    $user
+     * @param int  $id
+     * @param int  $parent
+     * @param User $user
      */
-    public function __construct(Comment $comment, User $user)
+    public function __construct($id, $parent, User $user)
     {
-        $this->comment = $comment;
+        $this->id = $id;
+        $this->parent = $parent;
         $this->user = $user;
     }
 

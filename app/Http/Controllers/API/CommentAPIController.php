@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Events\CommentChildPosted;
+use App\Events\CommentDeleted;
 use App\Events\CommentPosted;
+use App\Events\CommentUpdated;
 use App\Http\Requests\API\CreateCommentAPIRequest;
 use App\Http\Requests\API\UpdateCommentAPIRequest;
 use App\Models\Comment;
@@ -115,7 +116,7 @@ class CommentAPIController extends AppBaseController
 
         $parentComment->appendNode($comment);
 
-        event(new CommentChildPosted($comment, $user));
+        event(new CommentPosted($comment, $user));
 
         return $this->sendResponse($comment->toArray(), 'Comment saved successfully');
     }
@@ -166,6 +167,11 @@ class CommentAPIController extends AppBaseController
 
         $comment = $this->commentRepository->update($input, $id);
 
+        /** @var User $user */
+        $user = $comment->author;
+
+        event(new CommentUpdated($comment, $user));
+
         return $this->sendResponse($comment->toArray(), 'Comment updated successfully');
     }
 
@@ -188,7 +194,14 @@ class CommentAPIController extends AppBaseController
             return $this->sendError('Comment not found');
         }
 
+        $parent = $comment->parent_id;
+
         $comment->delete();
+
+        /** @var User $user */
+        $user = $comment->author;
+
+        event(new CommentDeleted($id, $parent, $user));
 
         return $this->sendResponse($id, 'Comment deleted successfully');
     }

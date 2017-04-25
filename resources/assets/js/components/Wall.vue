@@ -31,11 +31,32 @@
 
             Echo.channel('boss-river-135')
                 .listen('CommentPosted', (data) => {
-                    this.comments.unshift(data.comment);
+                    if (data.comment.parent_id) {
+                        let parent = this.pickDeep(this.comments, data.comment.parent_id);
+                        parent.children.push(data.comment);
+                    } else {
+                        this.comments.unshift(data.comment);
+                    }
                 })
-                .listen('CommentChildPosted', (data) => {
-                    let parent = this.pickDeep(this.comments, data.comment.parent_id);
-                    parent.children.push(data.comment);
+                .listen('CommentUpdated', (data) => {
+                    let comment = this.pickDeep(this.comments, data.comment.id);
+                    comment.content = data.comment.content;
+                })
+                .listen('CommentDeleted', (data) => {
+                    console.log(data);
+
+                    if (data.parent) {
+                        let parent = this.pickDeep(this.comments, data.parent);
+                        let comment = this.pickDeep(this.comments, parseInt(data.id));
+                        parent.children = _.filter(parent.children, function (n) {
+                            return n.id !== comment.id;
+                        });
+                    } else {
+                        let comment = this.pickDeep(this.comments, parseInt(data.id));
+                        this.comments = _.filter(this.comments, function (n) {
+                            return n.id !== comment.id;
+                        });
+                    }
                 });
         },
         methods: {
@@ -51,9 +72,6 @@
                 this.$http.get('/api/users/' + userId + '/comments')
                     .then(function (response) {
                         that.comments = response.data.data;
-                        that.pickDeep(that.comments, {id: 348}, function () {
-                            console.log('oi')
-                        });
                     });
             },
             toggleSidebar: function () {

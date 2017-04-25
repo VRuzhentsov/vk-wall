@@ -64,23 +64,24 @@
         methods: {
             login: function (event) {
                 let that = this;
-
                 let data = {
-                    client_id: 2,
-                    client_secret: 'KFhGbclXHPDcMyglktER2FJYVxVY40HZWwT0AM4r',
+                    client_id: Vue.config.auth.client_id,
+                    client_secret: Vue.config.auth.client_secret,
                     grant_type: 'password',
                     username: this.user.email,
                     password: this.user.password
                 };
 
+                that.$store.subscribe((mutation, state) => {
+                    if (state.user !== null) {
+                        that.$router.push('wall')
+                    }
+                });
+
                 this.$http.post('/oauth/token', data)
                     .then(response => {
-                            this.$auth.setToken(response.data.access_token, response.data.expires_in + Date.now());
-                            that.$store.dispatch('userHasLoggedIn', {token: response.data.access_token})
-                                .then(function () {
-                                    that.$router.push('wall')
-                                });
-
+                        this.$auth.setToken(response.data.access_token, response.data.expires_in + Date.now());
+                        that.$store.dispatch('userHasLoggedIn', {token: response.data.access_token});
                         }
                     )
             },

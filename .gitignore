@@ -12,3 +12,4 @@ Homestead.yaml
 /public/fonts/*
 /public/js/app.js
 /public/css/app.css
+/resources/assets/js/config/default.js
